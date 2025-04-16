@@ -8,7 +8,7 @@ from django.db import models
 class Cpreport(models.Model):
     Date = models.DateField()
     TIME = models.TimeField()
-    Parameter = models.CharField(max_length=100, null=True, blank=True)
+    Parameter = models.CharField(max_length=100,primary_key=True)
     StationId = models.CharField(max_length=100, null=True, blank=True)
     EquipmentId = models.CharField(max_length=100, null=True, blank=True)
     Value = models.FloatField(null=True, blank=True)
@@ -19,5 +19,6 @@ class Cpreport(models.Model):
     class Meta:
         db_table = 'Cpreport'  # 👈 دقت کن که حروف بزرگ‌کوچک مهمه برای SQL Server
         managed = False
+       
      
 
