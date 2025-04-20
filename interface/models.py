@@ -6,9 +6,9 @@ from django.db import models
 
 
 class Cpreport(models.Model):
-    Date = models.DateField()
+    Date = models.DateField(primary_key=True)
     TIME = models.TimeField()
-    Parameter = models.CharField(max_length=100,primary_key=True)
+    Parameter = models.CharField(max_length=100)
     StationId = models.CharField(max_length=100, null=True, blank=True)
     EquipmentId = models.CharField(max_length=100, null=True, blank=True)
     Value = models.FloatField(null=True, blank=True)
@@ -16,9 +16,13 @@ class Cpreport(models.Model):
     Location = models.CharField(max_length=100, null=True, blank=True)
     Tool = models.CharField(max_length=100, null=True, blank=True)
 
+
+
     class Meta:
         db_table = 'Cpreport'  # 👈 دقت کن که حروف بزرگ‌کوچک مهمه برای SQL Server
         managed = False
-       
-     
-
+    #     constraints=[
+    #         models.UniqueConstraint(fields=['Date','TIME','Parameter'],name="unique_date_time_parameter")
+    #    ]
+      
+    

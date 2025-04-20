@@ -1,3 +1,4 @@
+
 <html>
 <head>
 
@@ -6,36 +7,67 @@
 
 <style>
    body{
-    direction: rtl
-    ;
+    direction: rtl;
    }
-
+  .navbar-nav  li {
+    margin-right:45px;
+  }
 </style>
 </head>
 <body>
     
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
         <a class="navbar-brand" href="#">سامانه گزارش گیری </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto " style="">
             <li class="nav-item active">
-              <a class="nav-link" href="#">خروجی ها  <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" href="#">خروجی ها  </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">کاربران</a>
+              <a class="nav-link text-white" href="#">کاربران</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">دسترسی ها </a>
+              <a class="nav-link text-white" href="#">دسترسی ها </a>
             </li>
           </ul>
        
         </div>
       </nav>
+  
+    
+      
 
+      <table class="table">
+  <thead>
+    <tr class="table-primary">
+      <th scope="col">ردیف</th>
+      <th scope="col">پارامترها</th>
+      <th scope="col">موقعیت</th>
+      <th scope="col">ابزار</th>
+      <th scope="col">تاریخ</th>
+      <th scope="col">زمان </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      {% for i in  data %}
+        <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{i.Parameter}}</td>
+      <td>{{i.Location}}</td>
+      <td>{{i.Tool}}</td>
+      <td>{{i.Date|date:'Y/m/d ' }} </td>
+      <td>{{i.TIME|time:'H:i:s'}}</td>
+    </tr>
+       
+      {% endfor %}
+
+  </tbody>
+</table>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
