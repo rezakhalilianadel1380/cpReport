@@ -1,0 +1,116 @@
+
+<html>
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+<style>
+   body{
+    direction: rtl;
+   }
+  .navbar-nav  li {
+    margin-right:45px;
+  }
+  .checkbox-group {
+    display: flex;
+    gap:7px; /* optional spacing between items */
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
+        <a class="navbar-brand" href="#">سامانه گزارش گیری </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto " style="">
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="#">خروجی ها  </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">کاربران</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">دسترسی ها </a>
+            </li>
+          </ul>
+       
+        </div>
+      </nav>
+           <div class="container">
+            <div class="col-9 m-auto">
+
+                <canvas id="dualLeftChart" width="400" height="200"></canvas>
+
+            </div>
+           </div>
+        
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+<script>
+const ctx = document.getElementById('dualLeftChart').getContext('2d');
+
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ labels|safe }},
+        datasets: [
+            {
+                label: 'فشار',
+                data: {{ pressure_data|safe }},
+                borderColor: 'blue',
+                yAxisID: 'yPressure',
+                fill: false,
+                tension: 0.3,
+            },
+            {
+                label: 'دما',
+                data: {{ temperature_data|safe }},
+                borderColor: 'red',
+                yAxisID: 'yTemperature',
+                fill: false,
+                tension: 0.3,
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            yPressure: {
+                type: 'linear',
+                position: 'left',
+                title: {
+                    display: true,
+                    text: 'فشار (kPa)'
+                },
+                ticks: {
+                    color: 'blue'
+                }
+            },
+            yTemperature: {
+                type: 'linear',
+                position: 'left',
+                title: {
+                    display: true,
+                    text: 'دما (°C)'
+                },
+                grid: {
+                    drawOnChartArea: false
+                },
+                ticks: {
+                    color: 'red'
+                }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
