@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,26 +22,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9p_rzm_n)xanu)3_+x-oy+qh2@8)h=7_6g64b1c=fi82#r+83+'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
 
-INSTALLED_APPS = [
+
+
+DJANGO_APPS=[
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'interface',
-    'jalali_date',
 ]
+
+THIRY_PARTY_APPS=[
+     'jalali_date',
+]
+MY_APPS=[
+     'interface',
+]
+
+
+INSTALLED_APPS = DJANGO_APPS+THIRY_PARTY_APPS+MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,12 +87,12 @@ WSGI_APPLICATION = 'report.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'HydroTech',     # 👈 اسم دیتابیسی که restore کردی (مثلاً SCADA یا AutomationDB)
-        'HOST': 'WS131',                # 👈 همون Server Name که در اسکرین‌شات دیدیم
-        'PORT': '',                     # 👈 خالی بمونه، مگر اینکه پورت خاصی تنظیم شده
+        'NAME': 'HydroTech',  
+        'HOST': 'WS131',                
+        'PORT': '',                    
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',  # یا 18 اگر اون رو نصب داری
-            'trusted_connection': 'yes',                # 👈 چون از Windows Auth استفاده می‌کنی
+            'driver': 'ODBC Driver 17 for SQL Server',
+            'trusted_connection': 'yes',               
         },
     }
 }

@@ -76,11 +76,32 @@ const chart = new Chart(ctx, {
                 yAxisID: 'yTemperature',
                 fill: false,
                 tension: 0.3,
+            },
+            {
+                label: 'دبی',
+                data: {{ flow_data|safe }},
+                borderColor: 'green',
+                yAxisID: 'yFlow',
+                fill: false,
+                tension: 0.3,
             }
         ]
     },
     options: {
         responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'ترند فشار، دما و دبی از تاریخ 2024-01 تا 2024-04',
+                font: {
+                    size: 18
+                },
+                padding: {
+                    top: 10,
+                    bottom: 30
+                }
+            }
+        },
         scales: {
             yPressure: {
                 type: 'linear',
@@ -96,6 +117,7 @@ const chart = new Chart(ctx, {
             yTemperature: {
                 type: 'linear',
                 position: 'left',
+           
                 title: {
                     display: true,
                     text: 'دما (°C)'
@@ -106,10 +128,26 @@ const chart = new Chart(ctx, {
                 ticks: {
                     color: 'red'
                 }
+            },
+            yFlow: {
+                type: 'linear',
+                position: 'left',
+         
+                title: {
+                    display: true,
+                    text: 'دبی (L/min)'
+                },
+                grid: {
+                    drawOnChartArea: false
+                },
+                ticks: {
+                    color: 'green'
+                }
             }
         }
     }
 });
+
 </script>
 
 </body>
