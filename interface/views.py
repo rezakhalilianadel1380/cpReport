@@ -1,5 +1,10 @@
 from django.shortcuts import render
 from .models import Cpreport
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import os
+
 # Create your views here.
 def report(request):
     data=Cpreport.objects.raw(
@@ -11,6 +16,19 @@ def report(request):
     }
     return render(request,"report.html",context)
 
+
+
+def generate_pdf(request):
+    # Assuming you have a logo file inside your static folder
+    logo_path = request.build_absolute_uri('/static/logo.png')  # Update if your path is different
+
+    html_string = render_to_string('report_template.html', {'logo_path': logo_path})
+
+    pdf_file = HTML(string=html_string).write_pdf()
+
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="test_report.pdf"'
+    return response
 
 
 

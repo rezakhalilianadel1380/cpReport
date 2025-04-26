@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<style>
+@page {
+    size: A4;
+    margin: 10mm;
+}
+body {
+    font-family: 'Arial', sans-serif;
+}
+.page-border {
+    border: 5px solid black;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-border">
+    <div class="logo">
+        <img src="{{ logo_path }}" alt="لوگو" style="width: 120px;">
+    </div>
+
+    <h1 style="text-align: center;">گزارش داده‌ها</h1>
+
+    <p style="text-align: center;">این یک صفحه نمونه با حاشیه و لوگو است که با WeasyPrint ساخته شده است.</p>
+
+    <div class="footer">
+        صفحه 1
+    </div>
+</div>
+
+</body>
+</html>

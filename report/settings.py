@@ -43,10 +43,10 @@ DJANGO_APPS=[
 ]
 
 THIRY_PARTY_APPS=[
-     'jalali_date',
+    'jalali_date',
 ]
 MY_APPS=[
-     'interface',
+    'interface',
 ]
 
 

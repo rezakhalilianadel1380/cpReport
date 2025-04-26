@@ -21,8 +21,6 @@ class Cpreport(models.Model):
     class Meta:
         db_table = 'Cpreport'  # 👈 دقت کن که حروف بزرگ‌کوچک مهمه برای SQL Server
         managed = False
-    #     constraints=[
-    #         models.UniqueConstraint(fields=['Date','TIME','Parameter'],name="unique_date_time_parameter")
-    #    ]
+
       
     
